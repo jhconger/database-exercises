@@ -1,7 +1,7 @@
 USE employees;
 
 SELECT * FROM employees WHERE first_name IN ('Irena', 'Vidya', 'Maya')
-ORDER BY first_name, last_name;
+ORDER BY last_name DESC, first_name DESC;
 
 SELECT * FROM employees WHERE last_name LIKE 'E%' ORDER BY emp_no DESC;
 
