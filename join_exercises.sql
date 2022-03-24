@@ -37,9 +37,21 @@ ORDER BY d.dept_name;
 
 #Find the names of all current employees, their department name, and their current manager's name .
 
-# SELECT CONCAT(e.first_name, ' ', e.last_name) AS Employee, dept_name AS Department, CONCAT(e.first_name, ' ', e.last_name) AS Manager
+SELECT CONCAT(e.first_name, ' ', e.last_name) AS Employee, dept_name AS Department, CONCAT(em.first_name, ' ', em.last_name) AS Manager
 # FROM employees AS e
-# JOIN dept_emp de on e.emp_no = de.emp_no
-# JOIN dept_manager as dm on de.emp_no = dm.emp_no
-# JOIN departments AS d on de.dept_no = d.dept_no
+# JOIN dept_emp AS de ON e.emp_no = de.emp_no
+# JOIN departments AS d ON de.dept_no = d.dept_no
+# LEFT JOIN dept_manager dm on de.emp_no = dm.emp_no
+# and d.dept_no = dm.dept_no
+# WHERE de.to_date = '9999-01-01'
+# AND dm.to_date = '9999-01-01'
+# ORDER BY dept_name;
+
+FROM employees AS e
+JOIN dept_emp as de ON e.emp_no = de.emp_no
+JOIN departments as d ON d.dept_no = de.dept_no
+LEFT JOIN dept_manager AS dm ON dm.dept_no = d.dept_no
+JOIN employees  AS em ON em.emp_no = dm.emp_no
+WHERE de.to_date > NOW()
+AND dm.to_date > NOW();
 
